@@ -20,8 +20,12 @@ class Point(object):
             data = {}
 
         if isinstance(data, Series):
+
             if not isinstance(data.index, DatetimeIndex):
-                raise ValueError('invalid index value when importing from Series')
+                try:
+                    data.index = pd.to_datetime(data.index)
+                except ValueError:
+                    raise ValueError('invalid index value when importing from Series')
 
             if p_name is None:
                 p_name = data.name
