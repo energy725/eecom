@@ -84,7 +84,5 @@ class Point(object):
         return [dts[i] - dts[i-1] for i in range(1, len(dts))]
 
     def interval_fixed(self):
-        if set(self.intervals()) > 1:
-            return False
-        return True
+        return not set(self.intervals()) > 1
 
